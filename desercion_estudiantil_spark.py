@@ -96,6 +96,10 @@ def main():
 	print(f"Leyendo dataset desde: {input_path}")
 	df = load_dataset(spark, input_path)
 
+	output_path = "/kaggle/working/data/desercion_parquet"
+	df.write.mode("overwrite").parquet(output_path)
+	df = spark.read.parquet(output_path)
+
 	print("Esquema del dataset")
 	df.printSchema()
 
